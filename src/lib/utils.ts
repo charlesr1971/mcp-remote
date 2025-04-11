@@ -187,7 +187,6 @@ export async function connectToRemoteServer(
   const credentials = parseHeaders(headers, 'password', 'secret');
 
   const requestInit = {
-    body: headers,
     headers: credentials
   }
   const transport = new SSEClientTransport(url, { 
