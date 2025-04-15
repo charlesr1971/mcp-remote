@@ -92,7 +92,7 @@ All the most popular MCP clients (Claude Desktop, Cursor & Windsurf) use the fol
         "mcp-remote",
         "https://remote.mcp.server/sse",
         "--header",
-		    "APIGROUPEMAIL:bar@foo.com,USEREMAIL:foo@bar.com,PASSWORD:password,SECRET:7efc4391-e668-4c99-8e2b-b83f0bd1476c,KEYSFORENCRYPTION:password|foo"
+		    "APIGROUPEMAIL:bar@foo.com,USEREMAIL:foo@bar.com,PASSWORD:password,FOO:bar,SECRET:7efc4391-e668-4c99-8e2b-b83f0bd1476c,KEYSFORENCRYPTION:password|foo"
       ]
 ```
 
