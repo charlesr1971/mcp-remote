@@ -1,8 +1,14 @@
-# `mcp-remote`
+# `mcp-remote-encrypt`
 
 Connect an MCP Client that only supports local (stdio) servers to a Remote MCP Server, with auth support:
 
 **Note: this is a working proof-of-concept** but should be considered **experimental**.
+
+## CITATION:
+
+This library is heavily based on the brilliant library, `mcp-remote`, by _Glen Maddern_:
+
+https://github.com/geelen/mcp-remote
 
 ## Why is this necessary?
 
