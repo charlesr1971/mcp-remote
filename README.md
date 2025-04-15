@@ -74,6 +74,17 @@ All the most popular MCP clients (Claude Desktop, Cursor & Windsurf) use the fol
       ]
 ```
 
+* To add headers, pass `--header`, followed by the header name/value pairs, separated by a comma. Use a header called SECRET [can be lowercase] to encrypt a header called PASSWORD [can be lowercase]
+
+```json
+      "args": [
+        "mcp-remote",
+        "https://remote.mcp.server/sse",
+        "--header",
+		    "APIGROUPEMAIL:bar@foo.com,USEREMAIL:foo@bar.com,PASSWORD:password,SECRET:7efc4391-e668-4c99-8e2b-b83f0bd1476c"
+      ]
+```
+
 ### Claude Desktop
 
 [Official Docs](https://modelcontextprotocol.io/quickstart/user)
