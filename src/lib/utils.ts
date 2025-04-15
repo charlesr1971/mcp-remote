@@ -133,23 +133,38 @@ export function parseHeaders(
 ): any {
   const headersArr = headers.split(',');
   let credentials: any = {};
+  let headersKeysForEncryptionArr: any = [];
   if (headersArr.length > 0) {
     headersArr.map((val, idx) => {
       const keyValArr = val.split(':');
       let k = '';
       let v = '';
+      let isHeadersKeysForEncryption = false;
       keyValArr.map((val, idx) => {
         if (idx === 0) {
           k = val.toLowerCase().trim();
+          if(k === 'keysforencryption'){
+            isHeadersKeysForEncryption = true;
+          }
         } else {
           v = val.trim();
+          if(isHeadersKeysForEncryption){
+            headersKeysForEncryptionArr = v.split('|');
+            isHeadersKeysForEncryption = false;
+          }
         }
       });
       if (k !== '') {
         credentials[k] = v;
       }
     });
-    const keysForEncryptionArr = keysForEncryption.split(',');
+    log(`headersKeysForEncryptionArr: ${headersKeysForEncryptionArr}`);
+    let keysForEncryptionArr = keysForEncryption.split(',');
+    // if KEYSFORENCRYPTION is passed as a header name, then override the value passed into this method via the keysForEncryption argument
+    if(headersKeysForEncryptionArr.length > 0){
+      keysForEncryptionArr = headersKeysForEncryptionArr;
+    }
+    log(`keysForEncryptionArr: ${keysForEncryptionArr}`);
     for (const property in credentials) {
       log(`${property}: ${credentials[property]}`);
       const found = keysForEncryptionArr.find(
@@ -162,9 +177,11 @@ export function parseHeaders(
         log(`${property} decrypted: ${decrypted}`);
         credentials[property] = encrypted;
         log(`${property} encrypted: ${credentials[property]}`);
-        // now delete the secret so that it is not sent to the remote MCP server via SSE transport
-        delete credentials[secretKey];
       }
+    }
+    // now delete the secret so that it is not sent to the remote MCP server via SSE transport
+    if(secretKey in credentials){
+      delete credentials[secretKey];
     }
   }
   return credentials;

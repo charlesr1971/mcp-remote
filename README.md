@@ -85,6 +85,17 @@ All the most popular MCP clients (Claude Desktop, Cursor & Windsurf) use the fol
       ]
 ```
 
+* To add more than one key for encryption, using custom names, please add `KEYSFORENCRYPTION` with a pipe | delimited list, as a header name/value pair. The values must match header name values. Its important to pass password as one of the values, if you wish to encrypt the password header value. This overrides the default encryption mechanism, in the previous example.
+
+```json
+      "args": [
+        "mcp-remote",
+        "https://remote.mcp.server/sse",
+        "--header",
+		    "APIGROUPEMAIL:bar@foo.com,USEREMAIL:foo@bar.com,PASSWORD:password,SECRET:7efc4391-e668-4c99-8e2b-b83f0bd1476c,KEYSFORENCRYPTION:password|foo"
+      ]
+```
+
 ### Claude Desktop
 
 [Official Docs](https://modelcontextprotocol.io/quickstart/user)
