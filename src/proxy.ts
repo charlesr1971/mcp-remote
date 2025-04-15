@@ -17,6 +17,23 @@ import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'
 import { connectToRemoteServer, log, mcpProxy, parseCommandLineArgs, setupSignalHandlers, getServerUrlHash } from './lib/utils'
 import { NodeOAuthClientProvider } from './lib/node-oauth-client-provider'
 import { coordinateAuth } from './lib/coordination'
+// import 'mcps-logger/console';
+import { env } from "process";
+
+const DEBUGNAME = 'MCP-Remote: proxy.ts: ';
+let DEBUG = true;
+
+if (process.env.NODE_ENV === 'production') {
+  DEBUG = false;
+}
+
+const serverArgs = process.argv.slice(2);
+
+
+if (DEBUG) {
+  log(`${DEBUGNAME}: env: ${JSON.stringify(env, null, 3)}`);
+  log(`${DEBUGNAME}: serverArgs: ${JSON.stringify(serverArgs, null, 3)}`);
+}
 
 /**
  * Main function to run the proxy

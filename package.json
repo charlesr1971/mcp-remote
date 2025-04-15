@@ -1,7 +1,7 @@
 {
-  "name": "mcp-remote",
-  "version": "0.0.16",
-  "description": "Remote proxy for Model Context Protocol, allowing local-only clients to connect to remote servers using oAuth",
+  "name": "mcp-remote-encrypt",
+  "version": "0.0.1",
+  "description": "Remote proxy for Model Context Protocol, allowing local-only clients to connect to remote servers using oAuth. This version of Glen Maddern's original library, has the added features of being able to pass custom headers and encrypt header values",
   "keywords": [
     "mcp",
     "stdio",
@@ -9,8 +9,8 @@
     "remote",
     "oauth"
   ],
-  "author": "Glen Maddern <glen@cloudflare.com>",
-  "repository": "https://github.com/geelen/mcp-remote",
+  "author": "Mr Kodama <mrkodama2024@gmail.com>",
+  "repository": "https://github.com/charlesr1971/mcp-remote",
   "type": "module",
   "files": [
     "dist",

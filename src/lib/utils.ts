@@ -151,13 +151,17 @@ export function parseHeaders(
     });
     const keysForEncryptionArr = keysForEncryption.split(',');
     for (const property in credentials) {
+      log(`${property}: ${credentials[property]}`);
       const found = keysForEncryptionArr.find(
         (element) => element === property
       );
       if (found && secretKey in credentials) {
         const encrypted = encrypt(credentials[property], credentials[secretKey]);
         const decrypted = decrypt(encrypted, credentials[secretKey]);
+        log(`${property} encrypted: ${encrypted}`);
+        log(`${property} decrypted: ${decrypted}`);
         credentials[property] = encrypted;
+        log(`${property} encrypted: ${credentials[property]}`);
         // now delete the secret so that it is not sent to the remote MCP server via SSE transport
         delete credentials[secretKey];
       }
@@ -186,9 +190,13 @@ export async function connectToRemoteServer(
 
   const credentials = parseHeaders(headers, 'password', 'secret');
 
+  log(`requestInit credentials inside mcp-remote/src/lib/utils.ts: ${JSON.stringify(credentials, null, 3)}`);
+
   const requestInit = {
+    // body: headers,
     headers: credentials
   }
+  log(`requestInit headers inside mcp-remote/src/lib/utils.ts: ${JSON.stringify(requestInit, null, 3)}`);
   const transport = new SSEClientTransport(url, { 
     authProvider, 
     requestInit 
